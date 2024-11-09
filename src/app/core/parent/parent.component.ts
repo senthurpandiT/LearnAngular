@@ -1,7 +1,8 @@
 import { AfterContentInit, AfterViewInit, Component, DoCheck, OnChanges, SimpleChanges } from '@angular/core';
 import { ChildComponent } from "../child/child.component";
 import { CommonModule } from '@angular/common';
-import { flush } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { FilterPipe } from "../directives/searchfilter.pipe";
 
 export class Employee {
   constructor(
@@ -12,10 +13,10 @@ export class Employee {
 @Component({
   selector: 'app-parent',
   standalone: true,
-  imports: [ChildComponent, CommonModule],
+  imports: [ChildComponent, CommonModule, FormsModule, FilterPipe],
   templateUrl: './parent.component.html'
 })
-export class ParentComponent implements AfterContentInit {
+export class ParentComponent {
 
 
   itemArray = [
@@ -26,6 +27,10 @@ export class ParentComponent implements AfterContentInit {
     { id: 5, name: 'Item 5', value: 12 },
   ];
 
+  searchTerm: string = '';
+  searchFields: string[] = ['id', 'name', 'value'];
+
+
   data !: Employee
   result: any[] = [];
   senData() {
@@ -35,39 +40,39 @@ export class ParentComponent implements AfterContentInit {
     };
   }
   async ngOnInit() {
-    const result = await this.checkDataCondition();
-    console.log(result);
+    // const result = await this.checkDataCondition();
+    // console.log(result);
 
   }
-  checkDataCondition(): Promise<any> {
-    return new Promise((res, rej) => {
-      setTimeout(() => {
-        for (let i = 0; i < this.itemArray.length; i++) {
-          const item = this.itemArray[i];
+  // checkDataCondition(): Promise<any> {
+  //   return new Promise((res, rej) => {
+  //     setTimeout(() => {
+  //       for (let i = 0; i < this.itemArray.length; i++) {
+  //         const item = this.itemArray[i];
 
-          if (item.value > 10) {
-            this.result.push(item); // Add to the result if condition is satisfied
-          }
-        }
-        res(this.result)
-      }, 10000);
-    })
-  }
+  //         if (item.value > 10) {
+  //           this.result.push(item); // Add to the result if condition is satisfied
+  //         }
+  //       }
+  //       res(this.result)
+  //     }, 10000);
+  //   })
+  // }
 
-  ngDoCheck() {
-    console.log('ngDoCheck called');
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges called');
-  }
+  // ngDoCheck() {
+  //   console.log('ngDoCheck called');
+  // }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   console.log('ngOnChanges called');
+  // }
 
-  ngAfterContentInit(): void {
-    console.log('ngAfterContentInit called');
-  }
+  // ngAfterContentInit(): void {
+  //   console.log('ngAfterContentInit called');
+  // }
 
-  ngAfterContentChecked(): void {
-    console.log('ngAfterContentChecked called');
-  }
+  // ngAfterContentChecked(): void {
+  //   console.log('ngAfterContentChecked called');
+  // }
 
 
 }

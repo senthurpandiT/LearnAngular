@@ -9,7 +9,7 @@
 >
   Button
 </button> -->
-<button class="btn btn-primary" type="button" (click)="checkDataCondition()">
+<!-- <button class="btn btn-primary" type="button" (click)="checkDataCondition()">
   loopdata
 </button>
 
@@ -18,4 +18,31 @@
   {{ item?.name }}
 </div>
 <input [value]="item?.name" type="" />
-}
+} -->
+
+<div class="container">
+  <h1>Name</h1>
+
+  <!-- Input field for search term -->
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search fruits..." />
+
+  <!-- List of filtered items -->
+  <ul>
+    <li
+      *ngFor="let item of itemArray | searchfilter : searchTerm : searchFields"
+    >
+      {{ item.name }} (ID: {{ item.id }})
+    </li>
+  </ul>
+</div>
+<!-- <div class="container">
+  <h1>Id</h1>
+
+  <input type="text" [(ngModel)]="searchTerms" placeholder="Search fruits..." />
+
+  <ul>
+    <li *ngFor="let item of itemArray | Datefilter : searchTerms">
+      {{ item?.id }}
+    </li>
+  </ul>
+</div> -->
