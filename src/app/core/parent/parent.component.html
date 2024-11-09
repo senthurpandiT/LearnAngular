@@ -1,0 +1,21 @@
+<app-child [childData]="data"></app-child>
+<!-- <button
+  class="btn btn-primary"
+  type="button"
+  data-bs-toggle="offcanvas"
+  data-bs-target="#offcanvasExample"
+  aria-controls="offcanvasExample"
+  (click)="senData()"
+>
+  Button
+</button> -->
+<button class="btn btn-primary" type="button" (click)="checkDataCondition()">
+  loopdata
+</button>
+
+@for (item of result; track $index) {
+<div>
+  {{ item?.name }}
+</div>
+<input [value]="item?.name" type="" />
+}
