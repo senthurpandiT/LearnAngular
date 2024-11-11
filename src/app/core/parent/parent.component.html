@@ -1,4 +1,4 @@
-<app-child [childData]="data"></app-child>
+<!-- <app-child [childData]="data"></app-child> -->
 <!-- <button
   class="btn btn-primary"
   type="button"
@@ -20,13 +20,11 @@
 <input [value]="item?.name" type="" />
 } -->
 
-<div class="container">
+<!-- <div class="container">
   <h1>Name</h1>
 
-  <!-- Input field for search term -->
   <input type="text" [(ngModel)]="searchTerm" placeholder="Search fruits..." />
 
-  <!-- List of filtered items -->
   <ul>
     <li
       *ngFor="let item of itemArray | searchfilter : searchTerm : searchFields"
@@ -34,15 +32,33 @@
       {{ item.name }} (ID: {{ item.id }})
     </li>
   </ul>
-</div>
-<!-- <div class="container">
-  <h1>Id</h1>
-
-  <input type="text" [(ngModel)]="searchTerms" placeholder="Search fruits..." />
-
-  <ul>
-    <li *ngFor="let item of itemArray | Datefilter : searchTerms">
-      {{ item?.id }}
-    </li>
-  </ul>
 </div> -->
+<!-- <span>I am span 1</span>
+<br />
+<ng-container #vc></ng-container>
+<br />
+<span>I am span 2</span>
+
+<ng-template #tpl>
+  <span>I am a span in template</span>
+</ng-template> -->
+
+<!-- <div>
+  <button (click)="loadComponent()">Load Dynamic Component</button>
+  <ng-container #container></ng-container>
+</div> -->
+
+<!-- @let user = itemArray$ | async; @if (user) {
+<h1>Hello, {{ user.name }}</h1>
+<ul>
+  @for (snack of user.favoriteSnacks; track snack.id) {
+  <li>{{ snack.name }}</li>
+  }
+</ul>
+<button (click)="update(user)">Update profile</button>
+} -->
+<ng-container [ngTemplateOutlet]="profileTemplate()" />
+<ng-template #admin>This is the admin profile</ng-template>
+<ng-template #basic>This is the basic profile</ng-template>
+
+<button (click)="toggleProfileType()">Toggle Profile Type</button>
