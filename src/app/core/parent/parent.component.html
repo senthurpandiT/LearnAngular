@@ -1,4 +1,12 @@
-<!-- <app-child [childData]="data"></app-child> -->
+<!-- <div #notification>Viewport Example!</div>
+@defer(on hover(notification)){
+<app-child [childData]="data" />
+} @loading {
+<div>Loading...</div>
+} -->
+
+<app-child [childData]="data" />
+
 <!-- <button
   class="btn btn-primary"
   type="button"
@@ -57,8 +65,15 @@
 </ul>
 <button (click)="update(user)">Update profile</button>
 } -->
-<ng-container [ngTemplateOutlet]="profileTemplate()" />
+<!-- <ng-container [ngTemplateOutlet]="profileTemplate()" />
 <ng-template #admin>This is the admin profile</ng-template>
 <ng-template #basic>This is the basic profile</ng-template>
-
-<button (click)="toggleProfileType()">Toggle Profile Type</button>
+<button (click)="toggleProfileType()">Toggle Profile Type</button> -->
+<!-- <div *ngIf="dogservice.Dogs as user">
+  <ul>
+    <li *ngFor="let userItem of user">
+      {{ userItem.name }} (Age: {{ userItem.age }})
+      <a href="#" (click)="updateName(userItem.id)">Learn More</a>
+    </li>
+  </ul>
+</div> -->

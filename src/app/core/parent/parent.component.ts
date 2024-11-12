@@ -1,33 +1,53 @@
-import { Component, computed, TemplateRef, ViewChild, viewChild } from '@angular/core';
+import { Component, computed, Signal, signal, TemplateRef, ViewChild, viewChild } from '@angular/core';
 import { ChildComponent } from "../child/child.component";
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { FilterPipe } from "../directives/searchfilter.pipe";
+import { Observable, of } from 'rxjs';
+import { DogService } from '../Injections/dog.service';
 
-interface Snack {
+// interface Snack {
+//   id: number;
+//   name: string;
+// }
+
+// interface User {
+//   name: string;
+//   favoriteSnacks: Snack[];
+// }
+
+export class Employee {
+  constructor(public name: string,
+    public id: number) {
+
+  }
+
+
+}
+
+interface UserItem {
   id: number;
   name: string;
+  age: number;
 }
 
 interface User {
+  id: number;
   name: string;
-  favoriteSnacks: Snack[];
+  users: UserItem[];  // A list of users
 }
 
-export class Employee {
-  constructor(
-    public name: string,
-    public id: number
-  ) { }
-}
 @Component({
   selector: 'app-parent',
   standalone: true,
-  imports: [ChildComponent, CommonModule, FormsModule, FilterPipe],
+  imports: [ChildComponent, CommonModule, FormsModule, FilterPipe, ReactiveFormsModule],
   templateUrl: './parent.component.html',
   preserveWhitespaces: true,
 })
 export class ParentComponent {
+  // user = signal<User | null>(null);
+  // x: any;
+  // y: any;
 
 
   // itemArray = [
@@ -42,20 +62,21 @@ export class ParentComponent {
   // searchFields: string[] = ['id', 'name', 'value'];
 
 
-  // data !: Employee
+  data !: any
+  loader: boolean = false;
   // result: any[] = [];
   // senData() {
-  //   this.data = {
-  //     name: 'John Doe',
-  //     id: 123
-  //   };
   // }
 
   // @ViewChild('vc', { read: ViewContainerRef }) vc !: ViewContainerRef;
 
   // @ViewChild('tpl', { read: TemplateRef }) tpl!: TemplateRef<any>;
 
-  // constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(
+    // private componentFactoryResolver: ComponentFactoryResolver,
+    // private fb: FormBuilder,
+    public dogservice: DogService
+  ) { }
 
 
   // ngAfterViewInit() {
@@ -65,12 +86,69 @@ export class ParentComponent {
   //   this.vc?.insert(view);
   // }
 
-  // async ngOnInit() {
-  //   console.log('ngonint');
-  // const result = await this.checkDataCondition();
-  // console.log(result);
+  ngOnInit() {
+    console.log('ngonint');
 
+    setTimeout(() => {
+      this.data = this.dogservice?.Userdata
+      // this.loader = true
+    }, 5000);
+    // 
+
+    // let fetchedUser: User = {
+    //   id: 1,
+    //   name: 'John Doe',
+    //   users: [
+    //     { id: 1, name: 'Alice', age: 25 },
+    //     { id: 2, name: 'Bob', age: 30 },
+    //   ]
+    // };
+
+    // this.user.set(fetchedUser);
+    // const result = await this.checkDataCondition();
+    // console.log(result);
+    // this.x = signal(5);
+    // this.y = signal(3);
+
+
+  }
+
+  // updateName(userItem: UserItem): void {
+  //   const newName = prompt('Enter a new name', userItem.name);
+
+  //   if (newName) {
+  //     // Update the user's name in the signal
+  //     userItem.name = newName;
+  //     this.user.update(user => ({
+  //       ...user!,
+  //       users: user!.users.map(u =>
+  //         u.id === userItem.id ? { ...u, name: newName } : u
+  //       )
+  //     }));
+  //   }
   // }
+
+  // // Function to update the age of a user
+  // updateAge(userItem: UserItem): void {
+  //   const newAge = prompt('Enter a new age', userItem.age.toString());
+  //   if (newAge) {
+  //     // Update the user's age in the signal
+  //     userItem.age = parseInt(newAge, 10);
+  //     this.user.update(user => ({
+  //       ...user!,
+  //       users: user!.users.map(u =>
+  //         u.id === userItem.id ? { ...u, age: userItem.age } : u
+  //       )
+  //     }));
+  //   }
+  // }
+
+  // trackById(index: number, item: UserItem): number {
+  //   console.log(item.id);
+
+  //   return item.id;
+  // }
+
   // checkDataCondition(): Promise<any> {
   //   return new Promise((res, rej) => {
   //     setTimeout(() => {
@@ -93,13 +171,26 @@ export class ParentComponent {
   //   console.log('ngOnChanges called');
   // }
 
+  // ngAfterViewInit(): void {
+
+  //   console.log(this.loader, 'ngAfterViewInit called');
+
+
+  // }
+
   // ngAfterContentInit(): void {
   //   console.log('ngAfterContentInit called');
+  // }
+
+  // ngAfterViewChecked(): void {
+
+  //   console.log('ngAfterViewChecked called');
   // }
 
   // ngAfterContentChecked(): void {
   //   console.log('ngAfterContentChecked called');
   // }
+
   // @ViewChild('container', { read: ViewContainerRef }) container!: ViewContainerRef;
 
 
@@ -110,17 +201,18 @@ export class ParentComponent {
   //     this.container.clear();
   //   }, 2000);
   // }
-  @ViewChild('admin', { read: TemplateRef, static: true }) adminTemplate!: TemplateRef<any>;
-  @ViewChild('basic', { read: TemplateRef, static: true }) basicTemplate!: TemplateRef<any>;
-  isAdmin = false;
-  // adminTemplate = viewChild('admin', { read: TemplateRef });
-  // basicTemplate = viewChild('basic', { read: TemplateRef });
+  // @ViewChild('admin', { read: TemplateRef, static: true }) adminTemplate!: TemplateRef<any>;
+  // @ViewChild('basic', { read: TemplateRef, static: true }) basicTemplate!: TemplateRef<any>;
+  // isAdmin = false;
 
-  toggleProfileType() {
-    this.isAdmin = !this.isAdmin;
-  }
-  profileTemplate(): TemplateRef<any> {
-    return this.isAdmin ? this.adminTemplate : this.basicTemplate;
-  }
+
+  // toggleProfileType() {
+  //   this.isAdmin = !this.isAdmin;
+  // }
+  // profileTemplate(): TemplateRef<any> {
+  //   return this.isAdmin ? this.adminTemplate : this.basicTemplate;
+  // }
+
 
 }
+
