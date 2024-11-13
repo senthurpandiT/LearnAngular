@@ -1,8 +1,8 @@
-<div *ngIf="childData?.Dogs as user">
+<div>
   <!-- Loop over the users array -->
   <ul>
-    <li *ngFor="let userItem of user">
-      {{ userItem.name }} (Age: {{ userItem.age }})
+    <li *ngFor="let dogItem of this.childData">
+      {{ dogItem?.name }} (Age: {{ dogItem?.age }})
       <a href="#">Learn More</a>
     </li>
   </ul>

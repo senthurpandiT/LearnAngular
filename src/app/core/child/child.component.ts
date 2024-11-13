@@ -16,7 +16,7 @@ export class ChildComponent {
   // newEmployee: Employee | null = new Employee('senthur', 456);
   @Input() childData: any;
 
-  constructor(public dogservice: DogService) { }
+  constructor() { }
 
   ngOnInit() {
 
@@ -34,21 +34,21 @@ export class ChildComponent {
   //   console.log('ngOnDestroy called');
   // }
   update() {
-
     const A = {
-      id: 1,
+      id: this.childData.legth++,
       name: "Buddy",
       breed: "Golden Retriever",
       age: 3,
       description: "Friendly and energetic.",
       long_description: "Buddy is a friendly Golden Retriever who loves to play outdoors and enjoys long walks. He is very loyal and loves to be around people.",
       location: "New York, NY"
-    };
+    }
+    this.childData.push(A);
+    console.log(this.childData);
 
-    // Push the new dog data into the 'users' array
-    this.dogservice.Userdata.users.push(A);
+    setTimeout(() => {
 
-    console.log(this.dogservice.Userdata, 'ChildComponent');
-
+      // this.childData.shift(A);
+    }, 2000);
   }
 }
