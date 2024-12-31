@@ -1,0 +1,39 @@
+<!-- <table>
+  <thead>
+    <tr>
+      <th scope="col">Flags</th>
+      <th scope="col">Countries</th>
+      <th scope="col">Officials</th>
+    </tr>
+  </thead>
+  @defer () { @for (item of countryList.value(); track $index) {
+ <tbody>
+    <tr>
+      <th scope="row">
+        <img width="70px" height="40px;" [src]="item?.flags?.png" />
+      </th>
+      <td>{{ "[" + item?.name?.common + "]" }}</td>
+      <td>{{ item?.name?.official }}</td>
+    </tr>
+  </tbody>
+
+  } @empty() {
+  <div class="alert alert-danger" role="alert">No Country list</div>
+  } } @placeholder() {
+  <ax-skeleton />
+  } @loading() {
+  <ax-skeleton [animate]="true" />
+  } @error {
+  <div class="alert alert-danger" role="alert">Something went wrong!</div>
+  }
+  <tfoot>
+    <tr>
+      <th>Total Courses</th>
+      <td colspan="4">
+        <i>What are you waiting for? Get Started now for free</i>
+      </td>
+    </tr>
+  </tfoot>
+</table> -->
+
+<ax-skeleton />

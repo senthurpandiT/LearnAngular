@@ -7,6 +7,8 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
+          "inlineStyle": true,
+          "skipTests": true,
           "style": "scss"
         }
       },
@@ -26,10 +28,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/assetes"
             ],
             "styles": [
               "src/styles.scss"
@@ -85,10 +84,8 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              
+             "src/assetes"
             ],
             "styles": [
               "src/styles.scss"

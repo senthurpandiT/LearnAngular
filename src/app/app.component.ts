@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, resource, Signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -9,4 +9,10 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'angularlatest';
+  //  userId: Signal<string> = getUserId();
+  //  userResource = resource({
+  //   request: () => ({id: userId()}),
+  //   loader: ({request}) => fetchUser(request),
+  // });
+
 }
