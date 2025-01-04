@@ -9,5 +9,10 @@ import { CommonModule } from '@angular/common';
   styles: [],
 })
 export class AppComponent {
-  title = 'LearnAngular';
+  title = 'angularlatest';
+  //  userId: Signal<string> = getUserId();
+  //  userResource = resource({
+  //   request: () => ({id: userId()}),
+  //   loader: ({request}) => fetchUser(request),
+  // });
 }
