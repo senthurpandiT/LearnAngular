@@ -1,26 +1,18 @@
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, computed, resource } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SkeletonComponent } from "../skeleton.component";
+import { SkeletonComponent } from '../skeleton.component';
 
 @Component({
   selector: 'app-child',
   imports: [CommonModule, SkeletonComponent],
+  standalone: true,
   templateUrl: './child.component.html',
-  styles: ``
+  styles: ``,
 })
 export class ChildComponent {
-  constructor(private route: ActivatedRoute) { }
-  countryList = resource({
-    loader: () => {
-      return fetch(`https://restcountries.com/v3.1/all?fields=name,flags`).then(
-        (res) => res.json()
-      );;
-    },
-  })
+  constructor(private route: ActivatedRoute) {}
   ngOnInit() {
-    console.log(this.countryList.value);
-    // this.countryList = this.route.snapshot.data['country']  
+    // this.countryList = this.route.snapshot.data['country']
   }
-
 }
